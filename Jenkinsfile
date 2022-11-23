@@ -13,7 +13,7 @@ parameters {
     string(name: 'AWS_EB_APP', defaultValue: '', description: 'AWS_EB_APP')
     string(name: 'ISS_WAR_FILE_NAME', defaultValue: '', description: 'ISS_WAR_FILE_NAME')
     string(name: 'AWS_S3_BUCKET', defaultValue: '', description: 'AWS_S3_BUCKET')
-    string(name: 'AWS_APP_ENV' defaultValue: '', descript: 'AWS_APP_ENV')
+    string(name: 'AWS_APP_ENV', defaultValue: '', descript: 'AWS_APP_ENV')
 }
 
 stages {
