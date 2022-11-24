@@ -28,7 +28,7 @@ stages {
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
             //deploy to aws beanstalk
-        awseb-deployment-plugin 
+        //awseb-deployment-plugin 
         }
     }
 }
