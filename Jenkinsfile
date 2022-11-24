@@ -24,7 +24,7 @@ stages {
     stage('Deploy-Release') {
         steps {
             echo 'Hello'
-            echo $AWS_CREDENTIALS
+            echo AWS_CREDENTIALS
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
             //deploy to aws beanstalk
