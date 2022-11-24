@@ -6,6 +6,10 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 
+environment {
+    AWS_CREDENTIALS='AWS SECCRERT'
+}
+
 parameters {
     string(name: 'RELEASE', defaultValue: 'dev', description: 'RELEASE')
     string(name: 'EMAIL_RECIPIENTS', defaultValue: 'tejinder.singh@inmindcloud.com', description: 'EMAIL_RECIPIENTS')
@@ -19,13 +23,12 @@ parameters {
 stages {
     stage('Deploy-Release') {
         steps {
+            echo 'Hello'
+            echo $AWS_CREDENTIALS
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
-
-        //rename war file
-        sh """
-        echo 'Hello'
-        """
+            //deploy to aws beanstalk
+        awseb-deployment-plugin 
         }
     }
 }
