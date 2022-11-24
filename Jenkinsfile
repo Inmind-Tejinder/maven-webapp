@@ -18,7 +18,8 @@ parameters {
 
 stages {
     stage('Deploy-Release') {
-        //copy war files from "build-webapp-${RELEASE} to "target" folder"
+        steps {
+            //copy war files from "build-webapp-${RELEASE} to "target" folder"
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
         //rename war file
@@ -26,6 +27,7 @@ stages {
         echo 'Hello'
         mv target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/${ISS_WAR_FILE_NAME}.war
         """
+        }
     }
 }
 
