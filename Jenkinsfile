@@ -21,9 +21,9 @@ parameters {
 }
 
 stages {
-    stage('Deploy-Release') {
+    stage('Build') {
         steps {
-            echo 'Hello'
+            echo 'Build'
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
             copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
