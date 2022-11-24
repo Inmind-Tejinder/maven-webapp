@@ -24,12 +24,13 @@ stages {
     stage('Deploy-Release') {
         steps {
             echo 'Hello'
-            echo AWS_CREDENTIALS
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
-        copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
-            //deploy to aws beanstalk
-        //awseb-deployment-plugin 
+            copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
+
+            awsebdeployment applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", credentialId: "Inmind-EB-Admin", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"
+        
         }
+
     }
 }
 
