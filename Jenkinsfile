@@ -23,7 +23,9 @@ stages {
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
         //rename war file
-        
+        sh """
+        echo 'Hello'
+        """
         }
     }
 }
