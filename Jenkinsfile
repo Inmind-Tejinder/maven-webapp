@@ -23,10 +23,7 @@ stages {
         copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
         //rename war file
-        sh """
-        echo 'Hello'
-        mv target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/${ISS_WAR_FILE_NAME}.war
-        """
+        
         }
     }
 }
