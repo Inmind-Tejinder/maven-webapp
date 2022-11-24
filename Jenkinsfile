@@ -6,9 +6,6 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 
-environment {
-    AWS_CREDENTIALS=credentials('Inmind-EB-Admin')
-}
 
 parameters {
     string(name: 'RELEASE', defaultValue: 'dev', description: 'RELEASE')
