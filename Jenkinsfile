@@ -7,7 +7,7 @@ pipeline {
     }
 
 environment {
-    AWS_CREDENTIALS='AWS SECCRERT'
+    AWS_CREDENTIALS=credentials('Inmind-EB-Admin')
 }
 
 parameters {
