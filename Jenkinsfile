@@ -22,9 +22,9 @@ stages {
         steps {
             echo 'Deploy with aws cli'
 
-            bash 'aws s3 ls'
+            bat 'aws --version'
 
-            echi 'DONE S3'
+            echo 'DONE S3'
 
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
             copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
