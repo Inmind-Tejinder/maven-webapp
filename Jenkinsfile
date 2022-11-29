@@ -22,7 +22,7 @@ stages {
         steps {
             echo 'Deploy with aws cli'
 
-            aws s3 ls
+            bat 'aws s3 ls'
 
             echi 'DONE S3'
 
