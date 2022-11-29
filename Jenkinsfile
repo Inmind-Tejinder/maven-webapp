@@ -26,7 +26,7 @@ stages {
 
             echo 'Upate environment in progress'
 
-            bat 'aws elasticbeanstalk wait environment-updated --application-name=POC-Tejinder --environment-name=Poctejinder-Test'
+            bat 'aws elasticbeanstalk wait environment-updated --application-name=POC-Tejinder --environment-names=Poctejinder-Test'
 
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
             copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
