@@ -20,7 +20,12 @@ parameters {
 stages {
     stage('Deploy') {
         steps {
-            echo 'Deploy'
+            echo 'Deploy with aws cli'
+
+            aws s3 ls
+
+            echi 'DONE S3'
+
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
             copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
