@@ -22,7 +22,7 @@ stages {
         steps {
             echo 'Deploy with aws cli'
 
-            bat 'aws --version'
+            bat 'aws elasticbeanstalk update-environment --application-name=POC-Tejinder --environment-name=Poctejinder-Test --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM3,Value=Param3Value'
 
             echo 'DONE S3'
 
