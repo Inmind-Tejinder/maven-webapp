@@ -20,16 +20,21 @@ parameters {
 stages {
     stage('Deploy') {
         steps {
-            echo 'Deploy with aws cli'
+            echo 'Updating environment properties started'
 
-            bat 'aws elasticbeanstalk update-environment --application-name=POC-Tejinder --environment-name=Poctejinder-Test --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value'
+            bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value"
 
-            echo 'Upate environment in progress'
+            echo 'Update environment properties in progress'
 
-            bat 'aws elasticbeanstalk wait environment-updated --application-name=POC-Tejinder --environment-names=Poctejinder-Test'
+            bat "aws elasticbeanstalk wait environment-updated --application-name=${AWS_EB_APP} --environment-names=${AWS_APP_ENV}"
 
+            echo 'Update environment properties completed'
+
+            echo 'Copy artifacts started'
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
             copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
+
+            echo 'Copy artifacts finished'
 
             step([$class: 'AWSEBDeploymentBuilder', applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", keyPrefix: '', credentialId: "EB-Managed-Platform-Update", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"])
         
