@@ -23,10 +23,12 @@ stages {
             echo 'Updating environment properties started'
 
             withCredentials([aws(credentialsId: 'EB-Managed-Platform-Update', accessKeyVariable: 'AWS_KEY', secretKeyVariable: 'AWS_SECRET')]) {
-                echo "AWS KEY : ${AWS_KEY}"
-            }
+                bat "aws configure set aws_access_key_id ${AWS_KEY}"
+                bat "aws configure set aws_secret_access_key ${AWS_SECRET}"
+                bat "aws configure set default.region ${AWS_REGION}"
 
-            // bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value"
+                bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value"
+            }
 
             // echo 'Update environment properties in progress'
 
