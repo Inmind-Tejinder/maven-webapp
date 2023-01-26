@@ -22,21 +22,25 @@ stages {
         steps {
             echo 'Updating environment properties started'
 
-            bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value"
+            withCredentials([aws(credentialsId: 'EB-Managed-Platform-Update', accessKeyVariable: 'AWS_KEY', secretKeyVariable: 'AWS_SECRET')]) {
+                echo "AWS KEY : ${AWS_KEY}"
+            }
 
-            echo 'Update environment properties in progress'
+            // bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM4,Value=Param4Value"
 
-            bat "aws elasticbeanstalk wait environment-updated --application-name=${AWS_EB_APP} --environment-names=${AWS_APP_ENV}"
+            // echo 'Update environment properties in progress'
 
-            echo 'Update environment properties completed'
+            // bat "aws elasticbeanstalk wait environment-updated --application-name=${AWS_EB_APP} --environment-names=${AWS_APP_ENV}"
 
-            echo 'Copy artifacts started'
-            //copy war files from "build-webapp-${RELEASE} to "target" folder"
-            copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
+            // echo 'Update environment properties completed'
 
-            echo 'Copy artifacts finished'
+            // echo 'Copy artifacts started'
+            // //copy war files from "build-webapp-${RELEASE} to "target" folder"
+            // copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
-            step([$class: 'AWSEBDeploymentBuilder', applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", keyPrefix: '', credentialId: "EB-Managed-Platform-Update", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"])
+            // echo 'Copy artifacts finished'
+
+            // step([$class: 'AWSEBDeploymentBuilder', applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", keyPrefix: '', credentialId: "EB-Managed-Platform-Update", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"])
         
         }
 
