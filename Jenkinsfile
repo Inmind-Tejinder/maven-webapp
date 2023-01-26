@@ -30,13 +30,13 @@ stages {
 
             echo 'Update environment properties completed'
 
-           //echo 'Copy artifacts started'
+            echo 'Copy artifacts started'
             //copy war files from "build-webapp-${RELEASE} to "target" folder"
-            //copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
+            copyArtifacts projectName: "build-webapp-${RELEASE}", target: 'target', fingerprintArtifacts: true, selector: lastSuccessful()
 
-            //echo 'Copy artifacts finished'
+            echo 'Copy artifacts finished'
 
-            //step([$class: 'AWSEBDeploymentBuilder', applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", keyPrefix: '', credentialId: "EB-Managed-Platform-Update", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"])
+            step([$class: 'AWSEBDeploymentBuilder', applicationName: "${AWS_EB_APP}", awsRegion: "${AWS_REGION}", bucketName: "${AWS_S3_BUCKET}", keyPrefix: '', credentialId: "EB-Managed-Platform-Update", environmentName: "${AWS_APP_ENV}", maxAttempts: 30, rootObject: 'target/com.firstmavenproject/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war', versionLabelFormat: "webapp-${BUILD_NUMBER}"])
         
         }
 
