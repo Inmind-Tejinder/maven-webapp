@@ -28,7 +28,7 @@ stages {
                 bat "aws configure set aws_secret_access_key ${AWS_SECRET}"
                 bat "aws configure set default.region ${AWS_REGION}"
 
-                bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=API_URL,Value=inmindcloud.com Namespace=aws:elasticebeanstalk:container:tomcat:jvmoptions,OptionName=\"JVM Options\",Value=-Xmn128m"
+                bat "aws elasticbeanstalk update-environment --application-name=${AWS_EB_APP} --environment-name=${AWS_APP_ENV} --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=API_URL,Value=inmindcloud.com Namespace=aws:elasticbeanstalk:container:tomcat:jvmoptions,OptionName=\"JVM Options\",Value=-Xmn128m"
 
                 echo 'Update environment properties in progress'
 
