@@ -23,7 +23,7 @@ stages {
         steps {
             echo 'Updating environment properties started!!'
 
-            withCredentials([aws(credentialsId: "EB-Managed-Platform-Update", accessKeyVariable: 'AWS_KEY', secretKeyVariable: 'AWS_SECRET')]) {
+            withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", accessKeyVariable: 'AWS_KEY', secretKeyVariable: 'AWS_SECRET')]) {
                 bat "aws configure set aws_access_key_id ${AWS_KEY}"
                 bat "aws configure set aws_secret_access_key ${AWS_SECRET}"
                 bat "aws configure set default.region ${AWS_REGION}"
