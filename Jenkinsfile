@@ -21,7 +21,7 @@ parameters {
 stages {
     stage('Deploy') {
         steps {
-            echo 'Updating environment properties started!!'
+            echo 'Updating environment properties started'
 
             withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", accessKeyVariable: 'AWS_KEY', secretKeyVariable: 'AWS_SECRET')]) {
                 bat "aws configure set aws_access_key_id ${AWS_KEY}"
