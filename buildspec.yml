@@ -11,6 +11,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - mvn package
+      - mvn clean package
 artifacts:
   discard-paths: yes
