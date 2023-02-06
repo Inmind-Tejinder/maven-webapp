@@ -13,4 +13,5 @@ phases:
       - echo Build completed on `date`
       - mvn clean package
 artifacts:
-  discard-paths: yes
+  files:
+    - target/webapp-0.0.1-SNAPSHOT.war
