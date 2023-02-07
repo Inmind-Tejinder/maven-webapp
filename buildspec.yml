@@ -12,7 +12,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn clean package
-      - mv target/webapp-0.0.1-SNAPSHOT ROOT.war
+      - mv target/webapp-0.0.1-SNAPSHOT.war ROOT.war
 artifacts:
   files:
     - ROOT.war
