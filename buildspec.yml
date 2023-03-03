@@ -16,4 +16,4 @@ phases:
 artifacts:
   files:
     - ROOT.war
-  discard-paths: true
+  name: builds/build
