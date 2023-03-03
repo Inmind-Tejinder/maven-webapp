@@ -16,4 +16,4 @@ phases:
 artifacts:
   files:
     - ROOT.war
-  name: builds/build
+  name: $(CODEBUILD_SOURCE_VERSION)-build
