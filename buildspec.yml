@@ -10,6 +10,7 @@ phases:
       - mvn test
   post_build:
     commands:
+      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo Build completed on `date`
       - mvn clean package
       - mv target/webapp-0.0.1-SNAPSHOT.war ROOT.war
